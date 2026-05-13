@@ -1,0 +1,84 @@
+:root {
+    --accent: #ff477e;
+    --bg: #f8f9fa;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--tg-theme-bg-color, var(--bg));
+    color: var(--tg-theme-text-color, #333);
+    margin: 0; padding: 15px;
+}
+
+h2 { text-align: center; color: var(--accent); }
+
+/* Сетка магазина */
+#shop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.product {
+    background: white;
+    background-color: var(--tg-theme-secondary-bg-color, white);
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.product:active { transform: scale(0.95); }
+
+.product img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+
+.product p { font-weight: 600; padding: 5px; margin: 5px 0; font-size: 0.9em; }
+
+.product span {
+    display: block;
+    color: var(--accent);
+    font-weight: bold;
+    padding-bottom: 12px;
+}
+
+/* Окно заказа */
+#orderForm {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--tg-theme-bg-color, white);
+    z-index: 100;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.hidden { display: none !important; }
+
+.form-content { max-width: 400px; margin: 0 auto; }
+
+label { font-size: 0.85em; color: gray; margin-left: 5px; }
+
+input {
+    width: 100%; padding: 12px; margin: 8px 0 15px 0;
+    border-radius: 10px; border: 1px solid #ddd;
+    background: var(--tg-theme-secondary-bg-color, #fff);
+    color: var(--tg-theme-text-color, #000);
+    box-sizing: border-box;
+}
+
+.buy-btn {
+    background: var(--accent); color: white; border: none;
+    padding: 15px; width: 100%; border-radius: 10px;
+    font-weight: bold; font-size: 1em; cursor: pointer;
+}
+
+.back-btn {
+    background: none; color: gray; border: none;
+    width: 100%; padding: 10px; margin-top: 5px; cursor: pointer;
+}
