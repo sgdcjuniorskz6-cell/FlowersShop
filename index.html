@@ -1,64 +1,40 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flower Shop</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-</head>
-<body>
-    <div id="main-container">
-        <h2>Цветочный магазин</h2>
-        
-        <div id="shop">
-            <div class="product" onclick="openOrder('Красные Розы', 15000, 25)">
-                <img src="https://images.unsplash.com/photo-1548610762-65603791e1d2?w=400" alt="Roses">
-                <p>Красные Розы (25 шт)</p>
-                <span>15 000 ₸</span>
-            </div>
-
-            <div class="product" onclick="openOrder('Белые Пионы', 12000, 9)">
-                <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=400" alt="Peonies">
-                <p>Белые Пионы (9 шт)</p>
-                <span>12 000 ₸</span>
-            </div>
-
-            <div class="product" onclick="openOrder('Розовые Тюльпаны', 7000, 15)">
-                <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=400" alt="Tulips">
-                <p>Тюльпаны (15 шт)</p>
-                <span>7 000 ₸</span>
-            </div>
-
-            <div class="product" onclick="openOrder('Синие Гортензии', 18000, 3)">
-                <img src="https://images.unsplash.com/photo-1508784411316-02b8cd4d3a3a?w=400" alt="Hydrangea">
-                <p>Гортензии (3 шт)</p>
-                <span>18 000 ₸</span>
-            </div>
-        </div>
+<div id="shop">
+    <!-- БУКЕТЫ -->
+    <div class="product" onclick="openOrder('Букет Красных Роз', 15000)">
+        <img src="https://images.unsplash.com/photo-1548610762-65603791e1d2?w=400" alt="Roses">
+        <p>Красные Розы (25 шт)</p>
+        <span>15 000 ₸</span>
     </div>
 
-    <div id="orderForm" class="hidden">
-        <div class="form-content">
-            <h3 id="selectedFlower">Оформление заказа</h3>
-            <p>Заполните детали доставки, господин:</p>
-            
-            <label>Куда доставить?</label>
-            <input type="text" id="address" placeholder="Ваш адрес...">
-            
-            <label>Количество (букетов)</label>
-            <input type="number" id="count" value="1" min="1">
-            
-            <label>Ваш бюджет (₸)</label>
-            <input type="number" id="budget" placeholder="На какую сумму рассчитываете?">
-            
-            <div class="buttons">
-                <button class="buy-btn" onclick="sendData()">Подтвердить заказ</button>
-                <button class="back-btn" onclick="closeOrder()">Назад</button>
-            </div>
-        </div>
+    <div class="product" onclick="openOrder('Букет Пионов', 12000)">
+        <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=400" alt="Peonies">
+        <p>Белые Пионы (9 шт)</p>
+        <span>12 000 ₸</span>
     </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <!-- КОМНАТНЫЕ РАСТЕНИЯ -->
+    <div class="product" onclick="openOrder('Монстера в горшке', 8500)">
+        <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=400" alt="Monstera">
+        <p>Монстера (Растение)</p>
+        <span>8 500 ₸</span>
+    </div>
+
+    <div class="product" onclick="openOrder('Кактус Элита', 3500)">
+        <img src="https://images.unsplash.com/photo-1520302630591-fd1c66edc19d?w=400" alt="Cactus">
+        <p>Кактус в декоре</p>
+        <span>3 500 ₸</span>
+    </div>
+
+    <!-- ОДИНОЧНЫЕ ЦВЕТЫ -->
+    <div class="product" onclick="openOrder('Орхидея поштучно', 4500)">
+        <img src="https://images.unsplash.com/photo-1534885418874-418e54ec358c?w=400" alt="Orchid">
+        <p>Орхидея (1 ветка)</p>
+        <span>4 500 ₸</span>
+    </div>
+
+    <div class="product" onclick="openOrder('Подсолнух декоративный', 2500)">
+        <img src="https://images.unsplash.com/photo-1470509037663-253afd7f0f51?w=400" alt="Sunflower">
+        <p>Подсолнух (1 шт)</p>
+        <span>2 500 ₸</span>
+    </div>
+</div>
