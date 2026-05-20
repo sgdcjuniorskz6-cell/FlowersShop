@@ -1,40 +1,160 @@
-<div id="shop">
-    <!-- БУКЕТЫ -->
-    <div class="product" onclick="openOrder('Букет Красных Роз', 15000)">
-        <img src="https://images.unsplash.com/photo-1548610762-65603791e1d2?w=400" alt="Roses">
-        <p>Красные Розы (25 шт)</p>
-        <span>15 000 ₸</span>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Premium Flower Boutique</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div id="main-container">
+        <header>
+            <h1>FLORISTIQUE</h1>
+            <div class="divider"></div>
+            <p class="subtitle">Цветочный дом • Эксклюзивно для вас, господин</p>
+        </header>
+        
+        <div class="catalog">
+            <div class="category-title">Роскошные Букеты</div>
+            
+            <div class="product-card" onclick="openOrder('Королевские Красные Розы (51 шт)', 25000)">
+                <div class="product-info">
+                    <span class="product-name">Красные Розы (51 шт)</span>
+                    <span class="product-desc">Классический премиум-букет с бархатными бутонами</span>
+                </div>
+                <div class="product-price">25 000 ₸</div>
+            </div>
+
+            <div class="product-card" onclick="openOrder('Нежные Розовые Пионы (11 шт)', 18000)">
+                <div class="product-info">
+                    <span class="product-name">Розовые Пионы (11 шт)</span>
+                    <span class="product-desc">Пышные французские пионы высшего сорта</span>
+                </div>
+                <div class="product-price">18 000 ₸</div>
+            </div>
+
+            <div class="product-card" onclick="openOrder('Пионовидные Розы Kahala', 22000)">
+                <div class="product-info">
+                    <span class="product-name">Пионовидные Розы Kahala</span>
+                    <span class="product-desc">Уникальный персиковый оттенок с тонким ароматом</span>
+                </div>
+                <div class="product-price">22 000 ₸</div>
+            </div>
+
+            <div class="product-card" onclick="openOrder('Белоснежные Лилии', 16000)">
+                <div class="product-info">
+                    <span class="product-name">Белоснежные Лилии</span>
+                    <span class="product-desc">Стойкий королевский букет с изысканным шармом</span>
+                </div>
+                <div class="product-price">16 000 ₸</div>
+            </div>
+
+            <div class="product-card" onclick="openOrder('Неоновые Тюльпаны (25 шт)', 9500)">
+                <div class="product-info">
+                    <span class="product-name">Яркие Тюльпаны (25 шт)</span>
+                    <span class="product-desc">Сочные весенние цветы для отличного настроения</span>
+                </div>
+                <div class="product-price">9 500 ₸</div>
+            </div>
+
+            <div class="product-card" onclick="openOrder('Облако Голубых Гортензий', 15000)">
+                <div class="product-info">
+                    <span class="product-name">Голубые Гортензии</span>
+                    <span class="product-desc">Объемная, воздушная магия в фирменной упаковке</span>
+                </div>
+                <div class="product-price">15 000 ₸</div>
+            </div>
+
+            <div class="category-title">Растения для интерьера</div>
+
+            <div class="product-card" onclick="openOrder('Тропическая Монстера Deliciosa', 14000)">
+                <div class="product-info">
+                    <span class="product-name">Монстера Deliciosa</span>
+                    <span class="product-desc">Крупное зеленое растение для украшения кабинета</span>
+                </div>
+                <div class="product-price">14 000 ₸</div>
+            </div>
+
+            <div class="product-card" onclick="openOrder('Императорская Белая Орхидея', 11000)">
+                <div class="product-info">
+                    <span class="product-name">Белая Орхидея (2 ствола)</span>
+                    <span class="product-desc">Элегантное кашпо, долгий период цветения</span>
+                </div>
+                <div class="product-price">11 000 ₸</div>
+            </div>
+
+            <div class="product-card" onclick="openOrder('Денежное Дерево Премиум', 6000)">
+                <div class="product-info">
+                    <span class="product-name">Крассула (Денежное дерево)</span>
+                    <span class="product-desc">Символ достатка в строгом минималистичном горшке</span>
+                </div>
+                <div class="product-price">6 000 ₸</div>
+            </div>
+
+            <div class="product-card" onclick="openOrder('Экзотический Кактус Эуфорбия', 4500)">
+                <div class="product-info">
+                    <span class="product-name">Кактус Эуфорбия</span>
+                    <span class="product-desc">Стильный суккулент, не требующий сложного ухода</span>
+                </div>
+                <div class="product-price">4 500 ₸</div>
+            </div>
+
+            <div class="category-title">Особый Повод</div>
+
+            <div class="product-card" onclick="openOrder('Солнечные Подсолнухи', 8000)">
+                <div class="product-info">
+                    <span class="product-name">Крафтовые Подсолнухи</span>
+                    <span class="product-desc">Теплый, полевой букет в стильной бумаге</span>
+                </div>
+                <div class="product-price">8 000 ₸</div>
+            </div>
+
+            <div class="product-card" onclick="openOrder('Французская Лаванда', 5500)">
+                <div class="product-info">
+                    <span class="product-name">Сухоцвет Лаванды</span>
+                    <span class="product-desc">Стойкость до 3-х лет и успокаивающий аромат</span>
+                </div>
+                <div class="product-price">5 500 ₸</div>
+            </div>
+
+            <div class="product-card" onclick="openOrder('VIP Композиция в Шляпной Коробке', 45000)">
+                <div class="product-info">
+                    <span class="product-name">VIP Шляпная Коробка</span>
+                    <span class="product-desc">Авторский микс редких цветов класса люкс</span>
+                </div>
+                <div class="product-price">45 000 ₸</div>
+            </div>
+        </div>
     </div>
 
-    <div class="product" onclick="openOrder('Букет Пионов', 12000)">
-        <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=400" alt="Peonies">
-        <p>Белые Пионы (9 шт)</p>
-        <span>12 000 ₸</span>
+    <div id="orderForm" class="hidden">
+        <div class="form-container">
+            <span class="badge">Выбор господина</span>
+            <h2 id="selectedFlower">Название цветка</h2>
+            <div id="selectedPrice" class="form-price">0 ₸</div>
+            
+            <div class="input-field">
+                <label>Адрес доставки</label>
+                <input type="text" id="address" placeholder="Город, улица, дом, квартира">
+            </div>
+            
+            <div class="input-row">
+                <div class="input-field">
+                    <label>Количество</label>
+                    <input type="number" id="count" value="1" min="1">
+                </div>
+                <div class="input-field">
+                    <label>Желаемый бюджет (₸)</label>
+                    <input type="number" id="budget" placeholder="Необязательно">
+                </div>
+            </div>
+
+            <button class="btn-submit" onclick="sendData()">Подтвердить заказ</button>
+            <button class="btn-back" onclick="closeOrder()">← Вернуться в каталог</button>
+        </div>
     </div>
 
-    <!-- КОМНАТНЫЕ РАСТЕНИЯ -->
-    <div class="product" onclick="openOrder('Монстера в горшке', 8500)">
-        <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=400" alt="Monstera">
-        <p>Монстера (Растение)</p>
-        <span>8 500 ₸</span>
-    </div>
-
-    <div class="product" onclick="openOrder('Кактус Элита', 3500)">
-        <img src="https://images.unsplash.com/photo-1520302630591-fd1c66edc19d?w=400" alt="Cactus">
-        <p>Кактус в декоре</p>
-        <span>3 500 ₸</span>
-    </div>
-
-    <!-- ОДИНОЧНЫЕ ЦВЕТЫ -->
-    <div class="product" onclick="openOrder('Орхидея поштучно', 4500)">
-        <img src="https://images.unsplash.com/photo-1534885418874-418e54ec358c?w=400" alt="Orchid">
-        <p>Орхидея (1 ветка)</p>
-        <span>4 500 ₸</span>
-    </div>
-
-    <div class="product" onclick="openOrder('Подсолнух декоративный', 2500)">
-        <img src="https://images.unsplash.com/photo-1470509037663-253afd7f0f51?w=400" alt="Sunflower">
-        <p>Подсолнух (1 шт)</p>
-        <span>2 500 ₸</span>
-    </div>
-</div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,20 +1,54 @@
 let tg = window.Telegram.WebApp;
-let currentFlower = "";
+let selectedFlowerName = "";
 
-function openOrder(name, price, qty) {
-    currentFlower = name;
-    document.getElementById('shop').classList.add('hidden');
+// Подстраиваем Mini App под экран Телеграма
+tg.expand();
+tg.ready();
+
+function openOrder(name, price) {
+    selectedFlowerName = name;
+    
+    // Скрываем каталог, показываем форму
+    document.getElementById('main-container').classList.add('hidden');
     document.getElementById('orderForm').classList.remove('hidden');
-    document.getElementById('selectedFlower').innerText = name + " - " + price + "₸";
+    
+    // Подставляем данные выбранного цветка
+    document.getElementById('selectedFlower').innerText = name;
+    document.getElementById('selectedPrice').innerText = price.toLocaleString() + " ₸";
+    
+    // Прокручиваем наверх формы на всякий случай
+    window.scrollTo(0, 0);
+}
+
+function closeOrder() {
+    // Возвращаем всё обратно: скрываем форму, показываем каталог
+    document.getElementById('orderForm').classList.add('hidden');
+    document.getElementById('main-container').classList.remove('hidden');
+    
+    // Очищаем поля формы, чтобы при следующем заказе они были пустыми
+    document.getElementById('address').value = "";
+    document.getElementById('count').value = "1";
+    document.getElementById('budget').value = "";
 }
 
 function sendData() {
-    let data = {
-        flower: currentFlower,
-        address: document.getElementById('address').value,
-        count: document.getElementById('count').value,
-        budget: document.getElementById('budget').value
+    const address = document.getElementById('address').value.trim();
+    const count = document.getElementById('count').value;
+    const budget = document.getElementById('budget').value.trim();
+
+    if (!address || address.length < 5) {
+        tg.showAlert("Господин, пожалуйста, введите корректный адрес доставки.");
+        return;
+    }
+
+    const orderData = {
+        flower: selectedFlowerName,
+        address: address,
+        count: count,
+        budget: budget ? budget : "Не указан"
     };
-    tg.sendData(JSON.stringify(data)); // Отправляем данные боту
+
+    // Отправляем данные боту и закрываем окно
+    tg.sendData(JSON.stringify(orderData));
     tg.close();
 }
