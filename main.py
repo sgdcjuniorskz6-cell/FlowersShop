@@ -64,6 +64,12 @@ async def handle_order(message: types.Message):
         await message.answer("Произошла ошибка при передаче заказа. Пожалуйста, попробуйте еще раз.")
 
 async def main():
+    # Принудительно удаляем конфликтующий вебхук и очищаем зависшие сообщения
+    print("Сбрасываем конфликтующие вебхуки...")
+    await bot.delete_webhook(drop_pending_updates=True)
+    
+    # Запускаем чтение сообщений в VS Code
+    print("Бот успешно запущен в VS Code!")
     await dp.start_polling(bot)
 
 if __name__ == '__main__':
