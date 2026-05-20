@@ -6,7 +6,7 @@ from aiogram.filters import Command
 
 # --- КОНФИГУРАЦИЯ ---
 API_TOKEN = '8303770835:AAExGk3ohqt73XsSnz1rzyHtB_gaowNgytk'
-ADMIN_ID = 1482323384  
+ADMIN_ID =  1482323384
 WEB_APP_URL = "https://sgdcjuniorskz6-cell.github.io/FlowersShop/?v=3"
 
 bot = Bot(token=API_TOKEN)
@@ -23,7 +23,7 @@ async def start_command(message: types.Message):
         "Нажмите кнопку ниже, чтобы открыть наш новый каталог."
     )
     
-    # Кнопка под полем ввода
+    # ИСПРАВЛЕНО: Правильное создание клавиатуры без опечаток
     markup = types.ReplyKeyboardMarkup(
         keyboard=[
             [types.KeyboardButton(text="Открыть каталог 💐", web_app=types.WebAppInfo(url=WEB_APP_URL))]
@@ -33,11 +33,10 @@ async def start_command(message: types.Message):
     
     await message.answer(welcome_text, reply_markup=markup)
 
-# Хендлер получения данных из Mini App для aiogram 3.x
+# Хендлер получения данных из Mini App
 @dp.message(F.web_app_data)
 async def handle_order(message: types.Message):
     try:
-        # Извлекаем JSON из веб-приложения
         raw_data = message.web_app_data.data
         data = json.loads(raw_data)
         
@@ -53,10 +52,10 @@ async def handle_order(message: types.Message):
             f"🆔 ID пользователя: {message.from_user.id}"
         )
         
-        # Отправляем уведомление администратору (вам)
+        # Бот САМ пишет вам как администратору
         await bot.send_message(chat_id=ADMIN_ID, text=report)
         
-        # Ответ пользователю в чат
+        # Бот САМ пишет клиенту в чат
         await message.answer("Благодарю за выбор нашего салона, господин! Ваш заказ принят в обработку. Менеджер уже связывается с вами.")
         
     except Exception as e:
@@ -64,11 +63,8 @@ async def handle_order(message: types.Message):
         await message.answer("Произошла ошибка при передаче заказа. Пожалуйста, попробуйте еще раз.")
 
 async def main():
-    # Принудительно удаляем конфликтующий вебхук и очищаем зависшие сообщения
     print("Сбрасываем конфликтующие вебхуки...")
     await bot.delete_webhook(drop_pending_updates=True)
-    
-    # Запускаем чтение сообщений в VS Code
     print("Бот успешно запущен в VS Code!")
     await dp.start_polling(bot)
 
