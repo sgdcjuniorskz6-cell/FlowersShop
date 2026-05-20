@@ -6,7 +6,7 @@ from aiogram.types import WebAppInfo
 # --- КОНФИГУРАЦИЯ ---
 API_TOKEN = '8303770835:AAExGk3ohqt73XsSnz1rzyHtB_gaowNgytk'
 ADMIN_ID = 1482323384
-WEB_APP_URL = "https://sgdcjuniorskz6-cell.github.io/FlowersShop/?v=2"
+WEB_APP_URL = "https://sgdcjuniorskz6-cell.github.io/FlowersShop/"
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)

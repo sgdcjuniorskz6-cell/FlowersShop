@@ -4,10 +4,225 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Premium Flower Boutique</title>
-    <link rel="stylesheet" href="style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #151d30;
+            --accent: #d4af37; /* Благородное золото */
+            --text-main: #ffffff;
+            --text-muted: #8a99ad;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px 16px;
+            box-sizing: border-box;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            margin: 0 0 10px 0;
+        }
+
+        .divider {
+            height: 1px;
+            width: 60px;
+            background-color: var(--accent);
+            margin: 0 auto 12px auto;
+        }
+
+        .subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 25px 0 15px 0;
+            letter-spacing: 1px;
+        }
+
+        .catalog {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(212, 175, 55, 0.05);
+            transition: transform 0.1s ease, border-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .product-card:active {
+            transform: scale(0.98);
+            border-color: var(--accent);
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding-right: 15px;
+        }
+
+        .product-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .product-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+
+        .product-price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+
+        #orderForm {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            z-index: 9999;
+            box-sizing: border-box;
+            padding: 30px 20px;
+            overflow-y: auto;
+        }
+
+        .form-container {
+            max-width: 450px;
+            margin: 40px auto 0 auto;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        #orderForm h2 {
+            font-size: 1.6rem;
+            margin: 0 0 8px 0;
+            font-weight: 400;
+        }
+
+        .form-price {
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 35px;
+        }
+
+        .input-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        input {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 14px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+        }
+
+        .btn-submit {
+            background: var(--accent);
+            color: #0b0f19;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 25px;
+            box-shadow: 0 6px 20px rgba(214, 175, 87, 0.2);
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        .btn-back {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            width: 100%;
+            padding: 12px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
 <body>
+
     <div id="main-container">
         <header>
             <h1>FLORISTIQUE</h1>
@@ -50,7 +265,7 @@
                 <div class="product-price">16 000 ₸</div>
             </div>
 
-            <div class="product-card" onclick="openOrder('Неоновые Тюльпаны (25 шт)', 9500)">
+            <div class="product-card" onclick="openOrder('Яркие Тюльпаны (25 шт)', 9500)">
                 <div class="product-info">
                     <span class="product-name">Яркие Тюльпаны (25 шт)</span>
                     <span class="product-desc">Сочные весенние цветы для отличного настроения</span>
@@ -58,7 +273,7 @@
                 <div class="product-price">9 500 ₸</div>
             </div>
 
-            <div class="product-card" onclick="openOrder('Облако Голубых Гортензий', 15000)">
+            <div class="product-card" onclick="openOrder('Голубые Гортензии', 15000)">
                 <div class="product-info">
                     <span class="product-name">Голубые Гортензии</span>
                     <span class="product-desc">Объемная, воздушная магия в фирменной упаковке</span>
@@ -68,7 +283,7 @@
 
             <div class="category-title">Растения для интерьера</div>
 
-            <div class="product-card" onclick="openOrder('Тропическая Монстера Deliciosa', 14000)">
+            <div class="product-card" onclick="openOrder('Монстера Deliciosa', 14000)">
                 <div class="product-info">
                     <span class="product-name">Монстера Deliciosa</span>
                     <span class="product-desc">Крупное зеленое растение для украшения кабинета</span>
@@ -76,7 +291,7 @@
                 <div class="product-price">14 000 ₸</div>
             </div>
 
-            <div class="product-card" onclick="openOrder('Императорская Белая Орхидея', 11000)">
+            <div class="product-card" onclick="openOrder('Белая Орхидея (2 ствола)', 11000)">
                 <div class="product-info">
                     <span class="product-name">Белая Орхидея (2 ствола)</span>
                     <span class="product-desc">Элегантное кашпо, долгий период цветения</span>
@@ -84,7 +299,7 @@
                 <div class="product-price">11 000 ₸</div>
             </div>
 
-            <div class="product-card" onclick="openOrder('Денежное Дерево Премиум', 6000)">
+            <div class="product-card" onclick="openOrder('Крассула (Денежное дерево)', 6000)">
                 <div class="product-info">
                     <span class="product-name">Крассула (Денежное дерево)</span>
                     <span class="product-desc">Символ достатка в строгом минималистичном горшке</span>
@@ -92,38 +307,12 @@
                 <div class="product-price">6 000 ₸</div>
             </div>
 
-            <div class="product-card" onclick="openOrder('Экзотический Кактус Эуфорбия', 4500)">
+            <div class="product-card" onclick="openOrder('Кактус Эуфорбия', 4500)">
                 <div class="product-info">
                     <span class="product-name">Кактус Эуфорбия</span>
                     <span class="product-desc">Стильный суккулент, не требующий сложного ухода</span>
                 </div>
                 <div class="product-price">4 500 ₸</div>
-            </div>
-
-            <div class="category-title">Особый Повод</div>
-
-            <div class="product-card" onclick="openOrder('Солнечные Подсолнухи', 8000)">
-                <div class="product-info">
-                    <span class="product-name">Крафтовые Подсолнухи</span>
-                    <span class="product-desc">Теплый, полевой букет в стильной бумаге</span>
-                </div>
-                <div class="product-price">8 000 ₸</div>
-            </div>
-
-            <div class="product-card" onclick="openOrder('Французская Лаванда', 5500)">
-                <div class="product-info">
-                    <span class="product-name">Сухоцвет Лаванды</span>
-                    <span class="product-desc">Стойкость до 3-х лет и успокаивающий аромат</span>
-                </div>
-                <div class="product-price">5 500 ₸</div>
-            </div>
-
-            <div class="product-card" onclick="openOrder('VIP Композиция в Шляпной Коробке', 45000)">
-                <div class="product-info">
-                    <span class="product-name">VIP Шляпная Коробка</span>
-                    <span class="product-desc">Авторский микс редких цветов класса люкс</span>
-                </div>
-                <div class="product-price">45 000 ₸</div>
             </div>
         </div>
     </div>
@@ -155,6 +344,50 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        let tg = window.Telegram.WebApp;
+        let selectedFlowerName = "";
+
+        tg.expand();
+        tg.ready();
+
+        function openOrder(name, price) {
+            selectedFlowerName = name;
+            document.getElementById('main-container').classList.add('hidden');
+            document.getElementById('orderForm').classList.remove('hidden');
+            document.getElementById('selectedFlower').innerText = name;
+            document.getElementById('selectedPrice').innerText = price.toLocaleString() + " ₸";
+            window.scrollTo(0, 0);
+        }
+
+        function closeOrder() {
+            document.getElementById('orderForm').classList.add('hidden');
+            document.getElementById('main-container').classList.remove('hidden');
+            document.getElementById('address').value = "";
+            document.getElementById('count').value = "1";
+            document.getElementById('budget').value = "";
+        }
+
+        function sendData() {
+            const address = document.getElementById('address').value.trim();
+            const count = document.getElementById('count').value;
+            const budget = document.getElementById('budget').value.trim();
+
+            if (!address || address.length < 5) {
+                tg.showAlert("Господин, пожалуйста, введите корректный адрес доставки.");
+                return;
+            }
+
+            const orderData = {
+                flower: selectedFlowerName,
+                address: address,
+                count: count,
+                budget: budget ? budget : "Не указан"
+            };
+
+            tg.sendData(JSON.stringify(orderData));
+            tg.close();
+        }
+    </script>
 </body>
 </html>
