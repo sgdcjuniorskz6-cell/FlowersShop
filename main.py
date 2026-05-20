@@ -1,18 +1,19 @@
 import json
 import logging
-from aiogram import Bot, Dispatcher, types, executor
-from aiogram.types import WebAppInfo
+import asyncio
+from aiogram import Bot, Dispatcher, types, F
+from aiogram.filters import Command
 
 # --- КОНФИГУРАЦИЯ ---
 API_TOKEN = '8303770835:AAExGk3ohqt73XsSnz1rzyHtB_gaowNgytk'
-ADMIN_ID = 1482323384
-WEB_APP_URL = "https://sgdcjuniorskz6-cell.github.io/FlowersShop/"
+ADMIN_ID = 1482323384  
+WEB_APP_URL = "https://sgdcjuniorskz6-cell.github.io/FlowersShop/?v=3"
 
 bot = Bot(token=API_TOKEN)
-dp = Dispatcher(bot)
+dp = Dispatcher()
 logging.basicConfig(level=logging.INFO)
 
-@dp.message_handler(commands=['start'])
+@dp.message(Command("start"))
 async def start_command(message: types.Message):
     welcome_text = (
         f"Приветствую вас, господин {message.from_user.first_name}! 🎩\n\n"
@@ -22,15 +23,23 @@ async def start_command(message: types.Message):
         "Нажмите кнопку ниже, чтобы открыть наш новый каталог."
     )
     
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    markup.add(types.KeyboardButton(text="Открыть каталог 💐", web_app=WebAppInfo(url=WEB_APP_URL)))
+    # Кнопка под полем ввода
+    markup = types.ReplyKeyboardMarkup(
+        keyboard=[
+            [types.KeyboardButton(text="Открыть каталог 💐", web_app=types.WebAppInfo(url=WEB_APP_URL))]
+        ],
+        resize_keyboard=True
+    )
     
     await message.answer(welcome_text, reply_markup=markup)
 
-@dp.message_handler(content_types='web_app_data')
+# Хендлер получения данных из Mini App для aiogram 3.x
+@dp.message(F.web_app_data)
 async def handle_order(message: types.Message):
     try:
-        data = json.loads(message.web_app_data.data)
+        # Извлекаем JSON из веб-приложения
+        raw_data = message.web_app_data.data
+        data = json.loads(raw_data)
         
         report = (
             "🔔 ПОСТУПИЛ НОВЫЙ VIP-ЗАКАЗ\n"
@@ -44,15 +53,18 @@ async def handle_order(message: types.Message):
             f"🆔 ID пользователя: {message.from_user.id}"
         )
         
-        # Отправляем админу
-        await bot.send_message(ADMIN_ID, report)
+        # Отправляем уведомление администратору (вам)
+        await bot.send_message(chat_id=ADMIN_ID, text=report)
         
-        # Ответ клиенту
+        # Ответ пользователю в чат
         await message.answer("Благодарю за выбор нашего салона, господин! Ваш заказ принят в обработку. Менеджер уже связывается с вами.")
         
     except Exception as e:
         logging.error(f"Ошибка при обработке заказа: {e}")
         await message.answer("Произошла ошибка при передаче заказа. Пожалуйста, попробуйте еще раз.")
 
+async def main():
+    await dp.start_polling(bot)
+
 if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
+    asyncio.run(main())
